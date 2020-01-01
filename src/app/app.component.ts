@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   updatePizza(id, size) {
-    this.store.dispatch(new actions.Update(id, size));
+    this.store.dispatch(new actions.Update(id, { size: size }));
   }
 
   deletePizza(id) {
