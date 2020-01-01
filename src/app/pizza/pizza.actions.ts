@@ -5,6 +5,30 @@ export const CREATE = '[PIZZA] Create';
 export const UPDATE = '[PIZZA] Update'; 
 export const DELETE = '[PIZZA] Delete';
 
+export const QUERY = '[PIZZA] Query';
+export const ADD_ALL = '[PIZZA] Add All';
+export const SUCCESS = '[PIZZA] Successful Firestore Write';
+export const FAILED = '[PIZZA] Failed Firestore Write';
+
+export class Query implements Action {
+    readonly type = QUERY;
+    constructor() {}
+}
+
+export class AddAll implements Action {
+    readonly type = ADD_ALL;
+    constructor(public pizzas: Pizza[]) {}
+}
+
+export class Success implements Action {
+    readonly type = SUCCESS;
+    constructor() {}
+}
+
+export class Failed implements Action {
+    readonly type = FAILED;
+    constructor(public message: string) {}
+}
 export class Create implements Action {
     readonly type = CREATE;
     constructor(public pizza: Pizza) {}
@@ -15,9 +39,7 @@ export class Update implements Action {
     constructor(
         public id: string,
         public changes: Partial<Pizza>
-    ) {
-
-    }
+    ) { }
 }
 
 export class Delete implements Action {
@@ -28,4 +50,8 @@ export class Delete implements Action {
 export type PizzaActions
 = Create
 | Update
-| Delete;
+| Delete
+| Query
+| Success
+| Failed
+| AddAll;

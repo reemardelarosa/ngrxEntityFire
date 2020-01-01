@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.pizzas = this.store.select(fromPizza.selectAll);
+
+    this.store.dispatch(new actions.Query());
   }
 
   createPizza() {

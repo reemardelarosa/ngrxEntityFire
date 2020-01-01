@@ -11,13 +11,8 @@ export const pizzaAdapter = createEntityAdapter<Pizza>();
 export interface State extends EntityState<Pizza> {};
 
 const defaultPizza = {
-    ids: ['123'],
-    entities: {
-        '123': {
-            id: 123,
-            size: 'small'
-        }
-    }
+    ids: [],
+    entities: {}
 };
 
 export const initialState : State =  pizzaAdapter.getInitialState(defaultPizza);
@@ -38,6 +33,8 @@ export function pizzaReducer(
             }, state);
         case actions.DELETE:
             return pizzaAdapter.removeOne(action.id, state)
+        case actions.ADD_ALL:
+            return pizzaAdapter.addAll(action.pizzas, state);
         default:
             return state;
     }
@@ -45,7 +42,7 @@ export function pizzaReducer(
 
 // create the default selectors
 
-export const getPizzaState = createFeatureSelector<State>('pizza');
+export const getPizzaState = createFeatureSelector<State>('pizzas');
 
 export const {
     selectIds,
